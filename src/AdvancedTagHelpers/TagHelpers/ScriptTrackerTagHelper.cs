@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -37,7 +36,7 @@ namespace AdvancedTagHelpers.TagHelpers
         {
             var dependencyContext = GetScriptContext(Src);
 
-            var scriptContexts = (List<ScriptContext>)context.Items[typeof(BodyTagHelper)];
+            var scriptContexts = (List<ScriptContext>)ViewContext.ViewData[typeof(BodyTagHelper).FullName];
             scriptContexts.Add(dependencyContext);
 
             // The body will render the script tag.

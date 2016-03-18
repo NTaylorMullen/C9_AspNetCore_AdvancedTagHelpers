@@ -1,16 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace AdvancedTagHelpers.TagHelpers
 {
     public class BodyTagHelper : TagHelper
     {
+        [ViewContext]
+        public ViewContext ViewContext { get; set; }
+
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var scriptContexts = new List<ScriptContext>();
 
-            context.Items[typeof(BodyTagHelper)] = scriptContexts;
+            ViewContext.ViewData[typeof(BodyTagHelper).FullName] = scriptContexts;
             await output.GetChildContentAsync();
 
             var renderedScripts = new HashSet<string>();
@@ -31,7 +37,7 @@ namespace AdvancedTagHelpers.TagHelpers
             // Only need to render the dependency if it hasn't been rendered already.
             if (renderedScripts.Add(context.Src))
             {
-                content.AppendHtml($"<script src=\"{context.Src}\"></script>");
+                content.AppendHtml($"<script src=\"{context.Src}\"></script>{Environment.NewLine}");
             }
         }
     }
