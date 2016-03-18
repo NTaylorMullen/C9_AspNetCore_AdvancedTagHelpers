@@ -1,0 +1,69 @@
+﻿{
+  "userSecretsId": "aspnet-AdvancedTagHelpers-7d8c5646-4451-4764-a1d1-cfdc65e1d183",
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "dependencies": {
+    "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.HttpOverrides": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Identity": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.IISPlatformHandler": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-20100",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-20100",
+    "Microsoft.EntityFrameworkCore.Commands": "1.0.0-rc2-20100",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-20100",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-20100",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc2-20100",
+    "NETStandard.Library": "1.0.0-rc2-23826"
+  },
+
+  "commands": {
+    "ef": "EntityFrameworkCore.Commands"
+  },
+
+  "frameworks": {
+    "netstandardapp1.5": {
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
+  },
+
+  "tools": {
+    "dotnet-publish-iis": "1.0.0-rc2-20100",
+    "dotnet-razor-tooling": "1.0.0-rc2-20100"
+  },
+
+  "content": [
+    "wwwroot",
+    "Views",
+    "appsettings.json"
+  ],
+
+  "exclude": [
+    "node_modules"
+  ],
+
+  "publishExclude": [
+    "**.user",
+    "**.vspscc"
+  ],
+
+  "scripts": {
+    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ],
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath%" ]
+  }
+}
