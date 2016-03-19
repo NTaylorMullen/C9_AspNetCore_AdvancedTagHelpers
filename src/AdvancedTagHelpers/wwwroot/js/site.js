@@ -1,1 +1,2 @@
-﻿// Write your Javascript code.
+﻿/// <reference path="~/wwwroot/lib/jquery/dist/jquery.js" />
+/// <reference path="~/wwwroot/js/dependency.js" />

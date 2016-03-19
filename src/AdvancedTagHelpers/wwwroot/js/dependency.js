@@ -1,0 +1,1 @@
+﻿/// <reference path="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js" />
