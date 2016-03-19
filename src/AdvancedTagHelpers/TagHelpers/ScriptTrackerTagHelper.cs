@@ -17,6 +17,14 @@ namespace AdvancedTagHelpers.TagHelpers
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly string _wwwrootFolder;
 
+        public override int Order
+        {
+            get
+            {
+                return -999;
+            }
+        }
+
         public ScriptTrackerTagHelper(
             IApplicationEnvironment appEnv,
             IHostingEnvironment env,
@@ -34,6 +42,11 @@ namespace AdvancedTagHelpers.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            if (output.Attributes.ContainsName(nameof(Src)))
+            {
+                Src = output.Attributes[nameof(Src)].Value.ToString();
+            }
+
             var dependencyContext = GetScriptContext(Src);
 
             var scriptContexts = (List<ScriptContext>)ViewContext.ViewData[typeof(BodyTagHelper).FullName];
@@ -45,10 +58,18 @@ namespace AdvancedTagHelpers.TagHelpers
 
         private ScriptContext GetScriptContext(string src)
         {
+
             var dependencies = new List<ScriptContext>();
             var urlHelper = _urlHelperFactory.GetUrlHelper(ViewContext);
             var resolvedSrc = urlHelper.Content(src);
-            var fileInfo = _wwwroot.GetFileInfo(resolvedSrc);
+
+            var filePathSrc = resolvedSrc;
+            var queryStringStartIndex = filePathSrc.IndexOf('?');
+            if (queryStringStartIndex != -1)
+            {
+                filePathSrc = filePathSrc.Substring(0, queryStringStartIndex);
+            }
+            var fileInfo = _wwwroot.GetFileInfo(filePathSrc);
             using (var readStream = fileInfo.CreateReadStream())
             using (var reader = new StreamReader(readStream))
             {
