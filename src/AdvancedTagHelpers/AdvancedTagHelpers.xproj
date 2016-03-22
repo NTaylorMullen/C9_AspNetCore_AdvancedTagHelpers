@@ -9,7 +9,7 @@
     <ProjectGuid>0d62e3a2-23ed-440a-82a5-a21dfe4e519f</ProjectGuid>
     <RootNamespace>AdvancedTagHelpers</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\</OutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">.\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
